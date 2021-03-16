@@ -1,0 +1,40 @@
+<?xml version="1.0"?>
+<launch>
+    <group ns="maru2">
+        <arg name="robotfile" default="$(find maru2_description)/urdf/maru2.urdf"/>
+        <param name="robot_description" textfile="$(find maru2_description)/urdf/maru2.urdf" />
+
+        <!-- initial position arguments -->
+        <arg name="x" default="0.45"/>
+        <arg name="y" default="2"/>
+        <arg name="yaw" default="0"/>
+        <param name="spawn_mean_gauss" type="yaml" value="[$(arg x), $(arg y), $(arg yaw)]"/>
+
+        <!-- initial position noise arguments -->
+        <arg name="xdev" default="0.1"/>
+        <arg name="ydev" default="0.1"/>
+        <arg name="yawdev" default="0.00"/>
+        <param name="spawn_stddev_gauss" type="yaml" value="[$(arg xdev), $(arg ydev), $(arg yawdev)]"/>
+
+        <!-- bounds -->
+        <arg name="xmin" default="0.4"/>
+        <arg name="ymin" default="0.2"/>
+        <arg name="xmax" default="10.0"/>
+        <arg name="ymax" default="9.8"/>
+        <param name="spawn_bounds" type="yaml" value="[$(arg xmin), $(arg ymin), $(arg xmax), $(arg ymax)]"/>
+
+        <!-- configuration map -->
+        <param name="/map/configuration_map" type="string" value="$(find maru2_map)/saved_maps/configuration_space/room.pgm" />
+        <param name="/map/voxel_size" type="double" value="0.05" />
+
+        <!-- robot name -->
+        <arg name="robotname" default="maru2"/>
+        <param name="robot_name" type="string" value="$(arg robotname)"/>
+
+        <!-- spawn the model -->
+        <node name="robot_spawn" pkg="gazebo_ros" type="spawn_model" output="screen"
+              args="-urdf -param robot_description -model $(arg robotname)"/>
+        <!-- randomize the start (delay by 2 seconds to allow the model to load) -->
+        <node name="robot_randomize" pkg="maru2_description" type="generate_random_position.py" launch-prefix="bash -c 'sleep 2.0; $0 $@'"/>
+    </group>
+</launch>

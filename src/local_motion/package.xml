@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<package format="2">
+  <name>local_motion</name>
+  <version>0.0.0</version>
+  <description>local_motion planning algorithms</description>
+
+  <maintainer email="lia4@rpi.edu">Adam Li</maintainer>
+
+  <license>TODO</license>
+
+  <buildtool_depend>catkin</buildtool_depend>
+  <exec_depend>maru2_gazebo</exec_depend>
+
+  <export>
+    <!-- -->
+  </export>
+</package>

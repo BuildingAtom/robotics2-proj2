@@ -1,0 +1,20 @@
+<?xml version="1.0" ?>
+<launch>
+    <arg name="x" default="8"/>
+    <arg name="y" default="8"/>
+    <arg name="eval" default="false"/>
+    <arg name="stopdone" default="true"/>
+
+    <param name="/map/configuration_map" type="string" value="$(find maru2_map)/saved_maps/configuration_space/room.pgm" />
+    <param name="/map/free_space_map" type="string" value="$(find maru2_map)/saved_maps/free_space/room.pgm" />
+    <param name="/map/voxel_size" type="double" value="0.05" />
+
+
+    <node name="bug2" pkg="local_motion" type="bug2.py" output="screen"
+          args="$(arg x) $(arg y)" required="$(arg stopdone)"/>
+
+    <group if="$(arg eval)">
+        <node name="wavefront_eval" pkg="local_motion" type="eval_length.py" output="screen" cwd="node"/>
+    </group>
+
+</launch>

@@ -1,0 +1,29 @@
+<?xml version="1.0" ?>
+<launch>
+    <group ns="maru2">
+        <!-- setup for the local gps -->
+        <arg name="gpsrate" default="5"/>
+        <arg name="gpscov" default="0.01"/>
+        <arg name="gpslink" default="imu_link"/>
+        <param name="sim/gps_rate" type="double" value="$(arg gpsrate)"/>
+        <param name="sim/gps_cov" type="double" value="$(arg gpscov)"/>
+        <param name="sim/gps_link" type="string" value="$(arg gpslink)"/>
+        <node name="local_gps" pkg="maru2_description" type="local_gps.py" output="screen"/>
+
+        <!-- nothing special needed for proximity -->
+        <node name="proximity_middleman" pkg="maru2_description" type="proximity_middleman.py"/>
+
+        <!-- setup the bearing sensor -->
+        <!-- TODO
+        <arg name="bearingto" default="support_column"/>
+        <arg name="bearingframe" default="imu_link"/>
+        <arg name="bearingcov" default="0.05"/>
+        <arg name="bearingrate" default="10"/>
+        <param name="sim/bearing_to" type="string" value="$(arg bearingto)"/>
+        <param name="sim/bearing_frame" type="string" value="$(arg bearingframe)"/>
+        <param name="sim/bearing_cov" type="double" value="$(arg bearingcov)"/>
+        <param name="sim/bearing_rate" type="double" value="$(arg bearingrate)"/>
+        <node name="bearing" pkg="maru2_description" type="bearing.py"/>
+        -->
+    </group>
+</launch>

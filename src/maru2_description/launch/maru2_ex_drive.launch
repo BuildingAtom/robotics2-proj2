@@ -1,0 +1,8 @@
+<?xml version="1.0" ?>
+<launch>
+    <include file="$(find maru2_description)/launch/maru2_ex_cmdvel.launch"/>
+    <group ns="maru2">
+        <node name="simple_twist_controller" pkg="teleop_twist_keyboard" type="teleop_twist_keyboard.py"
+              output="screen" required="true" launch-prefix="bash -c 'sleep 2.0; $0 $@'"/>
+    </group>
+</launch>

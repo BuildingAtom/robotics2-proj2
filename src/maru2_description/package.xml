@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<package format="2">
+  <name>maru2_description</name>
+  <version>0.0.0</version>
+  <description>The maru2_description package, describing the simple circular base model used.</description>
+  <maintainer email="adam@todo.todo">Adam Li</maintainer>
+
+  <license>TODO</license>
+
+  <!-- Dependencies -->
+  <buildtool_depend>catkin</buildtool_depend>
+  <exec_depend>maru2_gazebo</exec_depend>
+  <build_depend>maru2_msgs</build_depend>
+  <exec_depend>maru2_msgs</exec_depend>
+
+  <export>
+    <!-- -->
+  </export>
+</package>
